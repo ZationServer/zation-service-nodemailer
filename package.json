@@ -1,6 +1,6 @@
 {
   "name": "zation-service-nodemailer",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "MIT",
   "description": "Zation service module for NodeMailer.",
   "main": "dist/index.js",
