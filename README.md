@@ -36,8 +36,8 @@ To use this module, you have to define it in the service configuration of your z
 Therefore you must use the build method, and this method requires a configuration argument. 
 In the configuration argument, you can define different transport configurations linked to a name (configName). 
 The transport options are the same as in the npm module [nodemailer](https://www.npmjs.com/package/nodemailer).  
-If you only want to specify one connection setting or 
-you have a primary connection setting that you will use the most it is recommended to use the default config name for it.
+If you only want to specify one transport or 
+you have a primary transport that you will use the most it is recommended to use the default config name for it.
 That will make it later easier to access the transporter because you don't have to provide every time the config name.
 
 ```typescript
