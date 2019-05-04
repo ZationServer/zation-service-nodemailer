@@ -61,7 +61,7 @@ module.exports = Config.serviceConfig(
         })]
     });
 ```
-In this example code, each worker of the zation server will create the defined transporters in the start.
+In this example code, each worker of the zation server will create the defined transporters in the start process.
 After the launch, the transporters can be accessed by using a SmallBag or Bag. 
 If something goes wrong by creating the transporters, the server won't start or notify you with a console.log it depends on your configurations of the server.
 
