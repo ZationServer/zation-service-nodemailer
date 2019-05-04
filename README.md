@@ -21,8 +21,8 @@
 
 ## What is Zation-service-nodemailer?
 ***Zation-service-nodemailer*** is a zation service module wrapper of the npm package [nodemailer](https://www.npmjs.com/package/nodemailer) for sending emails from a zation server.
-This module will automatically create transporter with your provided transport configurations on each worker. 
-Also, it will add new functionality to the SmallBag and Bag for easy sending emails or access the transporter instance.
+This module will automatically create transporters with your provided transport configurations on each worker. 
+Also, it will add new functionality to the SmallBag and Bag for easy sending emails or access the transporter instances.
 
 ## Install
 
@@ -61,12 +61,12 @@ module.exports = Config.serviceConfig(
         })]
     });
 ```
-In this example code, each worker of the zation server will create the defined transporter in the start with the transport configuration.
-After the launch, the transporter can be accessed by using a SmallBag or Bag. 
-If something goes wrong by creating the transporter, the server won't start or notify you with a console.log it depends on your configurations of the server.
+In this example code, each worker of the zation server will create the defined transporters in the start.
+After the launch, the transporters can be accessed by using a SmallBag or Bag. 
+If something goes wrong by creating the transporters, the server won't start or notify you with a console.log it depends on your configurations of the server.
 
 ### Access 
-For access to your transporter, you can use one of these new functionalities that will be added to the SmallBag class. 
+For access to your transporters, you can use one of these new functionalities that will be added to the SmallBag class. 
 Notice that this module also adds the typescript definitions and 
 that you can use these methods even on the Bag class because the Bag is extending the SmallBag.
 The new functionalities:
