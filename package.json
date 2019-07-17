@@ -22,8 +22,8 @@
     "url": "https://luca.scaringella.de"
   },
   "dependencies": {
-    "zation-server": ">=0.9.8",
-    "zation-service": "^0.3.4",
+    "zation-server": ">=1.1.6",
+    "zation-service": "^0.3.7",
     "@types/nodemailer": "^4.6.8",
     "nodemailer": "^6.1.1"
   },
