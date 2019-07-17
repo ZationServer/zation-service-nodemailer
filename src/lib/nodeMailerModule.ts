@@ -12,7 +12,7 @@ import * as JSONTransport   from "nodemailer/lib/json-transport";
 import * as SESTransport    from "nodemailer/lib/ses-transport";
 import {Transport, TransportOptions, Transporter, createTransport, SentMessageInfo} from "nodemailer";
 import {ServiceModule}   from "zation-service";
-import {SmallBag}        from "zation-server";
+import {Bag}             from "zation-server";
 import {Options}         from "nodemailer/lib/mailer";
 
 const serviceName = "NodeMailer";
@@ -29,7 +29,7 @@ export type NodeMailerConfig = (
 
 export namespace NodeMailerModule {
 
-    export function build(configs: Record<string, NodeMailerConfig> | DefaultConfig<NodeMailerConfig>): ServiceModule<NodeMailerConfig, Transporter, {},SmallBagExtension> {
+    export function build(configs: Record<string, NodeMailerConfig> | DefaultConfig<NodeMailerConfig>): ServiceModule<NodeMailerConfig, Transporter, {},BagExtension> {
         const service: any = configs;
         service.get = undefined;
         service.create = async (c): Promise<Transporter> => {
@@ -50,8 +50,8 @@ export namespace NodeMailerModule {
             serviceName: serviceName,
             service: service,
             bagExtensions: {
-                smallBag: {
-                    sendMail: async function(this: SmallBag,mailOptions : Options,configName : string = 'default') : Promise<SentMessageInfo> {
+                bag : {
+                    sendMail: async function(this: Bag,mailOptions : Options,configName : string = 'default') : Promise<SentMessageInfo> {
                         return new Promise<SentMessageInfo>(async (resolve, reject) => {
                             const service = await this.getService<Transporter>(serviceName, configName);
                             service.sendMail(mailOptions,(error, info) => {
@@ -60,10 +60,10 @@ export namespace NodeMailerModule {
                             });
                         });
                     },
-                    getNodeMailer: async function (this: SmallBag, configName: string = 'default'): Promise<Transporter> {
+                    getNodeMailer: async function (this: Bag, configName: string = 'default'): Promise<Transporter> {
                         return await this.getService<Transporter>(serviceName, configName);
                     },
-                    isNodeMailer: function (this: SmallBag, configName: string = 'default'): boolean {
+                    isNodeMailer: function (this: Bag, configName: string = 'default'): boolean {
                         return this.isService(serviceName, configName);
                     }
                 }
@@ -77,7 +77,7 @@ interface DefaultConfig<T> {
     default?: T;
 }
 
-interface SmallBagExtension {
+interface BagExtension {
     // noinspection JSUnusedGlobalSymbols
     /**
      * @description
@@ -117,6 +117,6 @@ interface SmallBagExtension {
 }
 
 declare module 'zation-server' {
-    export interface SmallBag extends SmallBagExtension{
+    export interface Bag extends BagExtension{
     }
 }
