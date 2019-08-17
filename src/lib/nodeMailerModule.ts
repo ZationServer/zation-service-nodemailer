@@ -1,19 +1,19 @@
 /*
 Author: Luca Scaringella
 GitHub: LucaCode
-©Copyright by Luca Scaringella
+Copyright(c) Luca Scaringella
  */
 
-import * as SMTPTransport from "nodemailer/lib/smtp-transport";
-import * as SMTPPool      from "nodemailer/lib/smtp-pool";
+import * as SMTPTransport     from "nodemailer/lib/smtp-transport";
+import * as SMTPPool          from "nodemailer/lib/smtp-pool";
 import * as SendmailTransport from "nodemailer/lib/sendmail-transport";
-import * as StreamTransport from "nodemailer/lib/stream-transport";
-import * as JSONTransport   from "nodemailer/lib/json-transport";
-import * as SESTransport    from "nodemailer/lib/ses-transport";
+import * as StreamTransport   from "nodemailer/lib/stream-transport";
+import * as JSONTransport     from "nodemailer/lib/json-transport";
+import * as SESTransport      from "nodemailer/lib/ses-transport";
 import {Transport, TransportOptions, Transporter, createTransport, SentMessageInfo} from "nodemailer";
-import {ServiceModule}   from "zation-service";
-import {Bag}             from "zation-server";
-import {Options}         from "nodemailer/lib/mailer";
+import {ServiceModule}              from "zation-service";
+import {Bag,RequestBag}             from "zation-server";
+import {Options}                    from "nodemailer/lib/mailer";
 
 const serviceName = "NodeMailer";
 
@@ -117,6 +117,6 @@ interface BagExtension {
 }
 
 declare module 'zation-server' {
-    export interface Bag extends BagExtension{
-    }
+    export interface Bag extends BagExtension {}
+    export interface RequestBag extends BagExtension {}
 }
