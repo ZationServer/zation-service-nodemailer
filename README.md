@@ -1,5 +1,5 @@
 # zation-service-nodemailer ⚙️
-*Zation service module for the NodeMailer service.*
+*Zation service for NodeMailer.*
 <h1 align="center">  
   <!-- Stability -->
   <a href="https://nodejs.org/api/documentation.html#documentation_stability_index">
@@ -20,9 +20,9 @@
 </h1>
 
 ## What is Zation-service-nodemailer?
-***Zation-service-nodemailer*** is a zation service module wrapper of the npm package [nodemailer](https://www.npmjs.com/package/nodemailer) for sending emails from a zation server.
-This module will automatically create transporters with your provided transport configurations on each worker. 
-Also, it will add new functionality to the SmallBag and Bag for easy sending emails or access the transporter instances.
+***Zation-service-nodemailer*** is a zation service wrapper of the npm package [nodemailer](https://www.npmjs.com/package/nodemailer) for sending emails from a zation server.
+This service will automatically create transporters with your provided instances configurations on each worker. 
+Also, it will add new functionality to the Bag and RequestBag for easy sending emails or access the transporter instances.
 
 ## Install
 
@@ -32,55 +32,53 @@ $ npm install --save zation-service-nodemailer
 
 ## Usage
 
-To use this module, you have to define it in the service configuration of your zation server. 
-Therefore you must use the build method, and this method requires a configuration argument. 
-In the configuration argument, you can define different transport configurations linked to a name (configName). 
+To use this service, you have to define it in the service configuration of your zation server. 
+Therefore you must use the build method, and this method requires an instances argument.
+In this argument, you can define different transport configurations linked to a name (instanceName). 
 The transport options are the same as in the npm module [nodemailer](https://www.npmjs.com/package/nodemailer).  
 If you only want to specify one transport or 
-you have a primary transport that you will use the most it is recommended to use the default config name for it.
-That will make it later easier to access the transporter because you don't have to provide every time the config name.
+you have a primary transport that you will use the most it is recommended to use the default instance name for it.
+That will make it later easier to access the transporter because you don't have to provide every time the instance name.
 
 ```typescript
-import {Config}         from 'zation-server';
-import NodeMailerModule from "zation-service-nodemailer";
+import {Config}          from 'zation-server';
+import NodeMailerService from "zation-service-nodemailer";
 
-module.exports = Config.serviceConfig(
-    { 
-        serviceModules : [
-        NodeMailerModule.build({
-            default: {
-                service: 'gmail',
-                auth: {
-                    pass: process.env.EMAIL_PASSWORD,
-                    user: process.env.EMAIL_USER
-                },
-                tsl: {
-                    rejectUnauthorized: false
-                }
+export default Config.serviceConfig({
+    ...NodeMailerService.build({
+        default: {
+            service: 'gmail',
+            auth: {
+                pass: process.env.EMAIL_PASSWORD,
+                user: process.env.EMAIL_USER
+            },
+            tsl: {
+                rejectUnauthorized: false
             }
-        })]
-    });
+        }
+    })
+});
 ```
-In this example code, each worker of the zation server will create the defined transporters in the start process.
-After the launch, the transporters can be accessed by using a SmallBag or Bag. 
-If something goes wrong by creating the transporters, the server won't start or notify you with a console.log it depends on your configurations of the server.
+In this example code, each worker of the zation server will create the defined transporter in the start process.
+After the launch, the transporters can be accessed by using a Bag or RequestBag.
+If something goes wrong by creating the transporter, the server won't start or notify you with a log it depends on your configuration of the server.
 
 ### Access 
-For access to your transporters, you can use one of these new functionalities that will be added to the SmallBag class. 
-Notice that this module also adds the typescript definitions and 
-that you can use these methods even on the Bag class because the Bag is extending the SmallBag.
+For access to your transporters, you can use one of these new functionalities that will be added to the Bag class.
+Notice that this service also adds the typescript definitions and 
+that you can use these methods even on the RequestBag class because the RequestBag is extending the Bag.
 The new functionalities:
 
-* `getNodeMailer` (`Function (configName ?: string) => Promise<Transporter>`) - This function returns the transporter, if it exists otherwise, it will throw a ServiceNotFoundError error. 
-It takes a config name as an argument if you don't provide one it will use the default config name. 
+* `getNodeMailer` (`Function (instanceName?: string) => Promise<Transporter>`) - This function returns the transporter instance, if it exists otherwise, it will throw a ServiceNotFoundError error. 
+It takes a instance name as an argument if you don't provide one it will use the default instance name.
                                 
-* `isNodeMailer` (`Function (configName ?: string) => boolean`) - This function returns a boolean that indicates if the transporter with the given configuration name exists. 
-If you don't provide a config name, it will use the default name.
+* `hasNodeMailer` (`Function (instanceName?: string) => boolean`) - This function returns a boolean that indicates if the transporter instance exists. 
+If you don't provide a instance name, it will use the default instance name.
 
-* `sendMail` (`Function (mailOptions: Options, configName ?: string) => Promise<SentMessageInfo>`) - With this function, you can simply send an email promise based by using one of your transporters.
-Notice that this function can throw a ServiceNotFoundError if the transporter with the config name is not found.
-The function takes the mailOptions and the config name as arguments.
-If you don't provide a config name, it will use the default name.
+* `sendMail` (`Function (mailOptions: Options, instanceName?: string) => Promise<SentMessageInfo>`) - With this function, you can simply send an email promise based by using one of your transporter instances.
+Notice that this function can throw a ServiceNotFoundError error if the transporter with the instance name is not found.
+The function takes the mailOptions and the instance name as arguments.
+If you don't provide a instance name, it will use the default instance name.
 ```typescript
 const mailOptions = {
     from: '"Fred Foo 👻" <foo@example.com>', // sender address
