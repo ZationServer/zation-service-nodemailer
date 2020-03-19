@@ -4,8 +4,8 @@ GitHub: LucaCode
 Copyright(c) Luca Scaringella
  */
 
-
-import {NodeMailerModule} from "./lib/nodeMailerModule";
+import './lib/nodeMailerBagExtension';
+import {NodeMailerPackage} from "./lib/nodeMailerPackage";
 // noinspection JSUnusedGlobalSymbols
-export default NodeMailerModule;
+export default NodeMailerPackage;
 
