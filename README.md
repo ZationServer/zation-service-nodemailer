@@ -21,7 +21,7 @@
 
 ## What is Zation-service-nodemailer?
 ***Zation-service-nodemailer*** is a zation service wrapper of the npm package [nodemailer](https://www.npmjs.com/package/nodemailer) for sending emails from a zation server.
-This service will automatically create transporters with your provided instances configurations on each worker. 
+This service will automatically create transporters with your provided instance configurations on each worker. 
 Also, it will add new functionality to the Bag and RequestBag for easy sending emails or access the transporter instances.
 
 ## Install
@@ -60,7 +60,7 @@ export default Config.serviceConfig({
 });
 ```
 In this example code, each worker of the zation server will create the defined transporter in the start process.
-After the launch, the transporters can be accessed by using a Bag or RequestBag.
+After the launch, the transporter can be accessed by using a Bag or RequestBag.
 If something goes wrong by creating the transporter, the server won't start or notify you with a log it depends on your configuration of the server.
 
 ### Access 
