@@ -2,7 +2,7 @@
   "name": "zation-service-nodemailer",
   "version": "0.1.7",
   "license": "MIT",
-  "description": "Zation service module for NodeMailer.",
+  "description": "Zation service for NodeMailer.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -22,14 +22,14 @@
     "url": "https://luca.scaringella.de"
   },
   "dependencies": {
-    "zation-server": ">=1.1.6",
-    "zation-service": "^0.3.7",
-    "@types/nodemailer": "^4.6.8",
-    "nodemailer": "^6.3.0"
+    "zation-server": ">=1.5.2",
+    "zation-service": "^0.4.3",
+    "@types/nodemailer": "^6.4.0",
+    "nodemailer": "^6.4.5"
   },
   "devDependencies": {
     "gulp": "4.0.1",
     "gulp-typescript": "^5.0.0",
-    "typescript": "^3.3.3"
+    "typescript": "^3.8.3"
   }
 }
