@@ -23,7 +23,7 @@ export type NodeMailerConfig = (
     SESTransport | SESTransport.Options |
     Transport | TransportOptions);
 
-export namespace NodeMailerPackage {
+export namespace NodeMailerService {
 
     /**
      * This build function creates a node mailer service package with

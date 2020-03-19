@@ -5,7 +5,7 @@ Copyright(c) Luca Scaringella
  */
 
 import './lib/nodeMailerBagExtension';
-import {NodeMailerPackage} from "./lib/nodeMailerPackage";
+import {NodeMailerService} from "./lib/nodeMailerService";
 // noinspection JSUnusedGlobalSymbols
-export default NodeMailerPackage;
+export default NodeMailerService;
 
