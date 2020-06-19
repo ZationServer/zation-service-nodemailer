@@ -52,12 +52,11 @@ interface BagExtension {
 
 declare module 'zation-server' {
     export interface Bag extends BagExtension {}
-    export interface RequestBag extends BagExtension {}
 }
 
 registerBagExtension({
     name: serviceName,
-    bag: {
+    properties: {
         sendMail: async function(this: Bag,mailOptions: Options,instanceName: string = 'default'): Promise<SentMessageInfo> {
             return new Promise<SentMessageInfo>(async (resolve, reject) => {
                 (await this.getService<Transporter>(serviceName, instanceName)).
