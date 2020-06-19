@@ -22,7 +22,7 @@
 ## What is Zation-service-nodemailer?
 ***Zation-service-nodemailer*** is a zation service wrapper of the npm package [nodemailer](https://www.npmjs.com/package/nodemailer) for sending emails from a zation server.
 This service will automatically create transporters with your provided instance configurations on each worker. 
-Also, it will add new functionality to the Bag and RequestBag for easy sending emails or access the transporter instances.
+Also, it will add new functionality to the Bag for easy sending emails or access the transporter instances.
 
 ## Install
 
@@ -31,9 +31,8 @@ $ npm install --save zation-service-nodemailer
 ```
 
 ## Usage
-
 To use this service, you have to define it in the service configuration of your zation server. 
-Therefore you must use the build method, and this method requires an instances argument.
+To do this, you use the default exported function that requires an instances argument.
 In this argument, you can define different transport configurations linked to a name (instanceName). 
 The transport options are the same as in the npm module [nodemailer](https://www.npmjs.com/package/nodemailer).  
 If you only want to specify one transport or 
@@ -45,7 +44,7 @@ import {Config}          from 'zation-server';
 import NodeMailerService from "zation-service-nodemailer";
 
 export default Config.serviceConfig({
-    ...NodeMailerService.build({
+    ...NodeMailerService({
         default: {
             service: 'gmail',
             auth: {
@@ -60,13 +59,12 @@ export default Config.serviceConfig({
 });
 ```
 In this example code, each worker of the zation server will create the defined transporter in the start process.
-After the launch, the transporter can be accessed by using a Bag or RequestBag.
+After the launch, the transporter can be accessed by using the Bag.
 If something goes wrong by creating the transporter, the server won't start or notify you with a log it depends on your configuration of the server.
 
 ### Access 
-For access to your transporters, you can use one of these new functionalities that will be added to the Bag class.
-Notice that this service also adds the typescript definitions and 
-that you can use these methods even on the RequestBag class because the RequestBag is extending the Bag.
+To access your transporters, you can use one of these new functionalities that will be added to the Bag class.
+Notice that this service also adds the typescript definitions.
 The new functionalities:
 
 * `getNodeMailer` (`Function (instanceName?: string) => Promise<Transporter>`) - This function returns the transporter instance, if it exists otherwise, it will throw a ServiceNotFoundError error. 
