@@ -23,43 +23,40 @@ export type NodeMailerConfig = (
     SESTransport | SESTransport.Options |
     Transport | TransportOptions);
 
-export namespace NodeMailerService {
-
-    /**
-     * This build function creates a node mailer service package with
-     * the provided instances configuration.
-     * You can use this package in the service config.
-     * @example
-     * export default Config.serviceConfig({
-     *     ...NodeMailer.build({
-     *         default: {
-     *             service: 'gmail',
-     *             auth: {
-     *                 pass: process.env.EMAIL_PASSWORD,
-     *                 user: process.env.EMAIL_USER
-     *             },
-     *             tsl: {
-     *                 rejectUnauthorized: false
-     *             }
-     *         }
-     *    })
-     * });
-     * @param instances
-     */
-    export function build(instances: Record<string, NodeMailerConfig> | DefaultInstance<NodeMailerConfig>): ServicePackage<NodeMailerConfig,Transporter> {
-        return {
-            [serviceName] : {
-                create: async (c): Promise<Transporter> => {
-                    const transport = createTransport(c);
-                    await (new Promise<void | string>((resolve, reject) => {
-                        transport.verify((err) => {
-                            err ? reject(err) : resolve();
-                        });
-                    }));
-                    return transport;
-                },
-                instances
-            }
-        };
-    }
+/**
+ * This function creates a node mailer service package
+ * with the provided instances configuration.
+ * You can use this package in the service config.
+ * @example
+ * export default Config.serviceConfig({
+ *     ...NodeMailerService({
+ *         default: {
+ *             service: 'gmail',
+ *             auth: {
+ *                 pass: process.env.EMAIL_PASSWORD,
+ *                 user: process.env.EMAIL_USER
+ *             },
+ *             tsl: {
+ *                 rejectUnauthorized: false
+ *             }
+ *         }
+ *    })
+ * });
+ * @param instances
+ */
+export function NodeMailerService(instances: Record<string, NodeMailerConfig> | DefaultInstance<NodeMailerConfig>): ServicePackage<NodeMailerConfig,Transporter> {
+    return {
+        [serviceName] : {
+            create: async (c): Promise<Transporter> => {
+                const transport = createTransport(c);
+                await (new Promise<void | string>((resolve, reject) => {
+                    transport.verify((err) => {
+                        err ? reject(err) : resolve();
+                    });
+                }));
+                return transport;
+            },
+            instances
+        }
+    };
 }
