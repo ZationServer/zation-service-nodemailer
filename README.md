@@ -1,5 +1,15 @@
 # zation-service-nodemailer ⚙️
 *Zation service for NodeMailer.*
+
+<h1 align="center">
+  <!-- Logo -->
+  <br/>
+  <a href="https://zation.io">
+      <img src="https://zation.io/img/zationWideLogo.svg" alt="Logo Zation" height="200"/>
+  </a>
+  <br/>
+</h1>
+
 <h1 align="center">  
   <!-- Stability -->
   <a href="https://nodejs.org/api/documentation.html#documentation_stability_index">
@@ -10,19 +20,19 @@
     <img src="https://img.shields.io/badge/%3C%2F%3E-typescript-blue.svg" alt="TypeScript"/>
   </a>    
   <!-- Downloads -->
-  <a href="https://npmjs.org/package/zation-service-mysql">
-    <img src="https://img.shields.io/npm/dm/zation-service-mysql.svg" alt="Downloads"/>
+  <a href="https://npmjs.org/package/zation-service-nodemailer">
+    <img src="https://img.shields.io/npm/dm/zation-service-nodemailer.svg" alt="Downloads"/>
   </a> 
   <!-- Size -->
-  <a href="https://npmjs.org/package/zation-service-mysql">
-      <img src="https://img.shields.io/bundlephobia/min/zation-service-mysql.svg" alt="Size"/>
+  <a href="https://npmjs.org/package/zation-service-nodemailer">
+      <img src="https://img.shields.io/bundlephobia/min/zation-service-nodemailer.svg" alt="Size"/>
   </a>  
 </h1>
 
 ## What is Zation-service-nodemailer?
 ***Zation-service-nodemailer*** is a zation service wrapper of the npm package [nodemailer](https://www.npmjs.com/package/nodemailer) for sending emails from a zation server.
-This service will automatically create transporters with your provided instance configurations on each worker. 
-Also, it will add new functionality to the Bag for easy sending emails or access the transporter instances.
+This service will automatically create transporters with your provided instance configurations.
+Also, it will extend the Bag with new functionality to easily send emails or access the transporter instances.
 
 ## Install
 
@@ -31,8 +41,8 @@ $ npm install --save zation-service-nodemailer
 ```
 
 ## Usage
-To use this service, you have to define it in the service configuration of your zation server. 
-To do this, you use the default exported function that requires an instances argument.
+To use this service, you have to define it in the services configuration of your zation server. 
+To do this, use the default exported function that requires an instances argument.
 In this argument, you can define different transport configurations linked to a name (instanceName). 
 The transport options are the same as in the npm module [nodemailer](https://www.npmjs.com/package/nodemailer).  
 If you only want to specify one transport or 
@@ -40,10 +50,10 @@ you have a primary transport that you will use the most it is recommended to use
 That will make it later easier to access the transporter because you don't have to provide every time the instance name.
 
 ```typescript
-import {Config}          from 'zation-server';
+import {Config}          from "zation-server";
 import NodeMailerService from "zation-service-nodemailer";
 
-export default Config.serviceConfig({
+export default Config.servicesConfig({
     ...NodeMailerService({
         default: {
             service: 'gmail',
@@ -58,9 +68,8 @@ export default Config.serviceConfig({
     })
 });
 ```
-In this example code, each worker of the zation server will create the defined transporter in the start process.
+In this example code, the zation server will create the defined transporter in the start process.
 After the launch, the transporter can be accessed by using the Bag.
-If something goes wrong by creating the transporter, the server won't start or notify you with a log it depends on your configuration of the server.
 
 ### Access 
 To access your transporters, you can use one of these new functionalities that will be added to the Bag class.
@@ -92,7 +101,7 @@ const info = await bag.sendMail(mailOptions);
 
 MIT License
 
-Copyright (c) 2019 Luca Scaringella
+Copyright (c) 2021 Ing. Luca Gian Scaringella
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -110,4 +119,4 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.                                                  
+SOFTWARE.                                               
