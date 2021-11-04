@@ -43,10 +43,10 @@ $ npm install --save zation-service-nodemailer
 ## Usage
 To use this service, you have to define it in the services configuration of your zation server. 
 To do this, use the default exported function that requires an instances argument.
-In this argument, you can define different transport configurations linked to a name (instanceName). 
+In this argument, you can define different transporter configurations linked to a name (instanceName). 
 The transport options are the same as in the npm module [nodemailer](https://www.npmjs.com/package/nodemailer).  
-If you only want to specify one transport or 
-you have a primary transport that you will use the most it is recommended to use the default instance name for it.
+If you only want to specify one transporter or 
+you have a primary transporter that you will use the most it is recommended to use the default instance name for it.
 That will make it later easier to access the transporter because you don't have to provide every time the instance name.
 
 ```typescript
