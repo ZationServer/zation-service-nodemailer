@@ -28,7 +28,7 @@
     "zation-service": "^0.7.0",
     "zation-bag-extension": "^5.0.0",
     "@types/nodemailer": "^6.4.4",
-    "nodemailer": "^6.7.0"
+    "nodemailer": "^6.7.2"
   },
   "devDependencies": {
     "typescript": "^3.8.3"
