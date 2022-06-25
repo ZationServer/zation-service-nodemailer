@@ -24,11 +24,13 @@
     "email": "lucacode1@gmail.com"
   },
   "dependencies": {
-    "zation-server": ">=1.7.0",
-    "zation-service": "^0.8.0",
-    "zation-bag-extension": "^7.0.0",
     "@types/nodemailer": "^6.4.4",
-    "nodemailer": "^6.7.2"
+    "nodemailer": "^6.7.5"
+  },
+  "peerDependencies": {
+    "zation-server": ">=3.0.0-pre-alpha.3",
+    "zation-service": "^0.8.0",
+    "zation-bag-extension": "^7.0.0"
   },
   "devDependencies": {
     "typescript": "^3.8.3"
