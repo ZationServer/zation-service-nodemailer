@@ -25,8 +25,8 @@
   },
   "dependencies": {
     "zation-server": ">=1.7.0",
-    "zation-service": "^0.7.0",
-    "zation-bag-extension": "^5.0.0",
+    "zation-service": "^0.8.0",
+    "zation-bag-extension": "^7.0.0",
     "@types/nodemailer": "^6.4.4",
     "nodemailer": "^6.7.2"
   },
